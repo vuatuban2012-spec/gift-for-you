@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Joke Of The Day</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#111;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+#box{
+    width:600px;
+}
+
+input{
+    padding:10px;
+    width:70%;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+#result{
+    margin-top:20px;
+    font-size:25px;
+    min-height:40px;
+}
+
+#hint{
+    color:gray;
+    margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="box">
+
+<h1>🧠 Joke Of The Day</h1>
+
+<p id="question"></p>
+
+<input type="text" id="answer" placeholder="Nhập đáp án...">
+
+<br><br>
+
+<button onclick="check()">Trả lời</button>
+
+<div id="result"></div>
+
+<div id="hint"></div>
+
+</div>
+
+<script>
+
+let step = 0;
+
+const questions = [
+
+{
+q: "Tại sao máy xay bị ghét?",
+a: "saygex",
+hint: "🌈 Không phải 'máy hư' đâu 😭"
+},
+
+{
+q: "Tại sao xương người mù khỏe?",
+a: "vì họ thiếu can't see",
+hint: "👀 Hint tiếng Anh..."
+},
+
+{
+q: "Trong lớp 8A8 có hai đại kình địch là ai?",
+a: "gia khang và bảo trọng",
+hint: ""
+}
+
+];
+
+function loadQuestion(){
+
+document.getElementById("question")
+.innerHTML = questions[step].q;
+
+document.getElementById("hint")
+.innerHTML = questions[step].hint;
+
+}
+
+loadQuestion();
+
+function check(){
+
+let input = document
+.getElementById("answer")
+.value
+.toLowerCase()
+.trim();
+
+if(input === questions[step].a){
+
+document.getElementById("result")
+.innerHTML = "✅ Chính xác 😭";
+
+step++;
+
+if(step < questions.length){
+
+setTimeout(() => {
+
+loadQuestion();
+
+document.getElementById("answer").value = "";
+
+document.getElementById("result").innerHTML = "";
+
+},1000);
+
+}else{
+
+setTimeout(() => {
+
+document.body.innerHTML = `
+<h1 style="
+font-size:60px;
+color:lime;
+text-align:center;
+margin-top:20%;
+">
+🤡 MÀY VỪA HOÀN THÀNH<br>
+BỘ CÂU HỎI NHẢM NHẤT 😭
+</h1>
+`;
+
+},1000);
+
+}
+
+}else{
+
+document.getElementById("result")
+.innerHTML = "❌ Sai rồi 😭";
+
+}
+
+}
+</script>
+
+</body>
+</html>
